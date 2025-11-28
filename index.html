@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Ukpong - Salesforce Administrator Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #00A1E0 0%, #0070D2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .certifications {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .cert-badge {
+            display: inline-block;
+            background: #0070D2;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: #0070D2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skills-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin: 0.3rem 0.3rem 0 0;
+            color: #555;
+        }
+        
+        .contact {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact a {
+            display: inline-block;
+            background: #0070D2;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        
+        .contact a:hover {
+            background: #005fb2;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>John Ukpong</h1>
+        <p>Salesforce Certified Administrator | Based in Yokohama, Japan</p>
+    </header>
+
+    <div class="container">
+        <section class="intro">
+            <h2>About Me</h2>
+            <p>Salesforce Administrator with hands-on experience building custom solutions, automating business processes, and creating data-driven analytics dashboards. Passionate about leveraging Salesforce to solve real-world business challenges and improve organizational efficiency.</p>
+        </section>
+
+        <section class="certifications">
+            <h2>Certifications</h2>
+            <span class="cert-badge">Salesforce Certified Administrator</span>
+            <!-- Add more certifications as you earn them -->
+        </section>
+
+        <section>
+            <h2 style="text-align: center; margin-bottom: 2rem;">Portfolio Projects</h2>
+            
+            <div class="projects">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>📋 Job Application Tracker</h3>
+                        <p>Custom CRM-style application tracking system built from scratch using Salesforce custom objects, fields, and Lightning App Builder.</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>Custom object with 10 fields</li>
+                            <li>4 filtered list views</li>
+                            <li>Custom Lightning App</li>
+                            <li>Professional UI/UX design</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Custom Objects</span>
+                            <span class="skills-tag">Lightning App Builder</span>
+                            <span class="skills-tag">List Views</span>
+                            <span class="skills-tag">Data Modeling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>⚡ Automated Follow-up System</h3>
+                        <p>Record-triggered Flow that automates task creation and email alerts based on application status changes.</p>
+                        <p><strong>Automation Logic:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>Conditional task creation (4 scenarios)</li>
+                            <li>Dynamic due date calculations</li>
+                            <li>Email notifications for key milestones</li>
+                            <li>Reduces manual tracking by 80%</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Flow Builder</span>
+                            <span class="skills-tag">Process Automation</span>
+                            <span class="skills-tag">Email Alerts</span>
+                            <span class="skills-tag">Formula Fields</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>📊 Analytics Dashboard</h3>
+                        <p>Comprehensive analytics dashboard with multiple report types and visualizations for data-driven decision making.</p>
+                        <p><strong>Components:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>4 custom reports (charts & tables)</li>
+                            <li>Real-time dashboard with 4 components</li>
+                            <li>Multiple visualization types</li>
+                            <li>Actionable insights display</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Reports & Dashboards</span>
+                            <span class="skills-tag">Data Analysis</span>
+                            <span class="skills-tag">Chart Builder</span>
+                            <span class="skills-tag">Business Intelligence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>Let's Connect</h2>
+            <p style="margin: 1rem 0;">I'm actively seeking Salesforce Administrator opportunities in Japan or remote roles.</p>
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+            <a href="https://trailblazer.me/id/yourprofile" target="_blank">Trailblazer Profile</a>
+            <a href="mailto:your.email@example.com">Email Me</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 John Ukpong | Salesforce Administrator Portfolio</p>
+    </footer>
+</body>
+</html>
