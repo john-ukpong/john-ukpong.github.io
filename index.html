@@ -1,4 +1,436 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Ukpong - Salesforce Platform Administrator Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #00A1E0 0%, #0070D2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 3px solid rgba(255,255,255,0.6);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .header-text {
+            text-align: left;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 600px) {
+            .header-text {
+                text-align: center;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .intro p {
+            margin-bottom: 1rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .certifications {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .cert-badge {
+            display: inline-block;
+            background: #0070D2;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .project-screenshot {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+            cursor: pointer;
+            border-bottom: 2px solid #f0f0f0;
+            transition: opacity 0.2s ease;
+        }
+
+        .project-screenshot:hover {
+            opacity: 0.9;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: #0070D2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skills-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin: 0.3rem 0.3rem 0 0;
+            color: #555;
+        }
+        
+        .contact {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact a {
+            display: inline-block;
+            background: #0070D2;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        
+        .contact a:hover {
+            background: #005fb2;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem; right: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">✕</span>
+        <img id="lightbox-img" src="" alt="Project Screenshot">
+    </div>
+
+    <header>
+        <div class="header-content">
+            <img src="profile-photo.jpg" alt="John Ukpong" class="profile-photo">
+            <div class="header-text">
+                <h1>John Ukpong</h1>
+                <p>Salesforce Certified Platform Administrator | Based in Kawasaki, Japan</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section class="intro">
+            <h2>About Me</h2>
+          <p>People often ask why I moved from seven years of client relations and accounting operations—using tools like BUSY—into Salesforce administration. The truth is simple: I love systems that solve problems. I spent years managing complex financial data and navigating manual bottlenecks, and I realized I’d rather be the person building the solution than the person struggling with the workaround.</p>
+            <p>I moved to Japan in 2023. I am a Salesforce Certified Platform Administrator, but I am a problem-solver first. Whether I am designing a new object relationship, building a flow that eliminates manual data entry, or creating a dashboard that makes a messy pipeline clear, my goal is to make the system work for the person using it.</p>
+            <p>When I am not in the Org, you can find me on the futsal pitch, catching a match, or digging into JavaScript to sharpen my technical edge. I believe that whether it is on the field or in a developer environment, if you are not constantly practicing, you are standing still.</p>
+            <p>I treat my toolkit like a craftsman treats their gear. I am deep into the Salesforce ecosystem, but I am currently expanding into web technologies like JavaScript to build even more custom, integrated experiences.</p>
+            <p>If you are looking for someone who understands both the human side of operations and the technical side of platform administration, let's talk. I am based in Japan and open to remote opportunities where I can help a team get a little more efficient every day.</p>
+        </section>
+
+        <section class="certifications">
+            <h2>Certifications</h2>
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                <img src="salesforce-admin-badge.png" 
+                     alt="Salesforce Certified Platform Administrator Badge"
+                     style="width: 120px; height: 120px; object-fit: contain;">
+                <div>
+                    <span class="cert-badge">Salesforce Certified Platform Administrator</span>
+                    <p style="margin-top: 0.5rem; color: #555; font-size: 0.95rem;">Issued by Salesforce | November 2025</p>
+                    <p style="color: #555; font-size: 0.9rem;">Credential verified on Trailhead</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="certifications">
+            <h2>Trailhead Profile</h2>
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                <img src="ranger-badge.png"
+                     alt="Salesforce Ranger Rank Badge"
+                     style="width: 120px; height: 120px; object-fit: contain;">
+                <div>
+                    <p style="font-size: 1.1rem; font-weight: bold; color: #0070D2;">🏆 Ranger</p>
+                    <p style="color: #555; margin: 0.3rem 0;">Highest Trailhead rank achieved</p>
+                    <p style="color: #555; margin: 0.3rem 0;">View my badges, superbadges, and learning progress:</p>
+                    <a href="https://trailblazer.me/id/johnukpong" 
+                       target="_blank"
+                       style="display: inline-block; background: #0070D2; color: white; padding: 0.6rem 1.5rem; border-radius: 5px; text-decoration: none; margin-top: 0.5rem;">
+                        View Trailhead Profile →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 style="text-align: center; margin-bottom: 2rem;">Portfolio Projects</h2>
+            
+            <div class="projects">
+
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="project1-job-tracker.PNG" 
+                         alt="Job Application Tracker Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
+                    <div class="project-content">
+                        <h3>📋 Job Application Tracker (End-to-End CRM App)</h3>
+                        <p>Complete end-user application designed for daily use, featuring intuitive navigation, filtered views, and a custom Lightning interface for managing the job search lifecycle from research through offer stages.</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>Custom object with 10 fields</li>
+                            <li>5 filtered list views</li>
+                            <li>Custom Lightning App</li>
+                            <li>Professional UI/UX design</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Custom Objects</span>
+                            <span class="skills-tag">Lightning App Builder</span>
+                            <span class="skills-tag">List Views</span>
+                            <span class="skills-tag">Data Modeling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="project2-flow-builder.PNG" 
+                         alt="Automated Follow-up Flow Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
+                    <div class="project-content">
+                        <h3>⚡ Automated Follow-up System</h3>
+                        <p>Record-triggered Flow that automates task creation and email alerts based on application status changes.</p>
+                        <p><strong>Automation Logic:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>Conditional task creation (4 scenarios)</li>
+                            <li>Dynamic due date calculations</li>
+                            <li>Email notifications for key milestones</li>
+                            <li>Reduces manual tracking by 80%</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Flow Builder</span>
+                            <span class="skills-tag">Process Automation</span>
+                            <span class="skills-tag">Email Alerts</span>
+                            <span class="skills-tag">Formula Fields</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="project3-dashboard.PNG" 
+                         alt="Analytics Dashboard Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
+                    <div class="project-content">
+                        <h3>📊 Analytics Dashboard</h3>
+                        <p>Comprehensive analytics dashboard with multiple report types and visualizations for data-driven decision making.</p>
+                        <p><strong>Components:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>4 custom reports (charts & tables)</li>
+                            <li>Real-time dashboard with 4 components</li>
+                            <li>Multiple visualization types</li>
+                            <li>Actionable insights display</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Reports & Dashboards</span>
+                            <span class="skills-tag">Data Analysis</span>
+                            <span class="skills-tag">Chart Builder</span>
+                            <span class="skills-tag">Business Intelligence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <img src="project4-knowledge-hub.PNG" 
+                         alt="Learning Resources Knowledge Hub Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
+                    <div class="project-content">
+                        <h3>📚 Learning Resources Knowledge Hub</h3>
+                        <p>Personal knowledge management system with lookup relationships for organizing learning materials and tracking progress.</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>Custom object with 10 organized fields</li>
+                            <li>Lookup relationship to Job Applications</li>
+                            <li>4 filtered list views for different contexts</li>
+                            <li>Rating and progress tracking system</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Object Relationships</span>
+                            <span class="skills-tag">Lightning Pages</span>
+                            <span class="skills-tag">List Views</span>
+                            <span class="skills-tag">Knowledge Management</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <img src="project5-daily-log.PNG" 
+                         alt="Daily Work Log System Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
+                    <div class="project-content">
+                        <h3>📔 Daily Work Log System</h3>
+                        <p>Personal productivity tracking system for logging daily Salesforce activities, learnings, and progress with categorization and time tracking.</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 1rem 0;">
+                            <li>9 custom fields including mood and time tracking</li>
+                            <li>Category system across learning, projects, job search</li>
+                            <li>4 filtered list views for different contexts</li>
+                            <li>Lookup relationship to Job Applications</li>
+                        </ul>
+                        <div>
+                            <span class="skills-tag">Custom Objects</span>
+                            <span class="skills-tag">Data Organization</span>
+                            <span class="skills-tag">Productivity Tracking</span>
+                            <span class="skills-tag">Object Relationships</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>Let's Connect</h2>
+            <p style="margin: 1rem 0;">I'm exploring opportunities where my Salesforce skills can support teams—whether in admin, operations, or related roles in Japan or remote.</p>
+            <a href="https://www.linkedin.com/in/johnukpong" target="_blank">LinkedIn</a>
+            <a href="https://trailblazer.me/id/johnukpong" target="_blank">Trailblazer Profile</a>
+            <a href="mailto:jmukpong@gmail.com">Email Me</a>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 John Ukpong | Salesforce Platform Administrator Portfolio</p>
+    </footer>
+
+    <script>
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').classList.add('active');
@@ -8,14 +440,10 @@
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        // Close when clicking the background, but not the image itself
-        document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target !== document.getElementById('lightbox-img')) {
-                closeLightbox();
-            }
-        });
-
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
         });
     </script>
+
+</body>
+</html>
