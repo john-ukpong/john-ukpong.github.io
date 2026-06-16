@@ -48,6 +48,14 @@
             margin-bottom: 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+
+        .intro p {
+            margin-bottom: 1rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
         
         .certifications {
             background: white;
@@ -87,10 +95,19 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.15);
         }
         
-        .project-card img {
+        .project-screenshot {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            object-position: top;
+            display: block;
+            cursor: pointer;
+            border-bottom: 2px solid #f0f0f0;
+            transition: opacity 0.2s ease;
+        }
+
+        .project-screenshot:hover {
+            opacity: 0.9;
         }
         
         .project-content {
@@ -141,9 +158,49 @@
             padding: 2rem;
             color: #666;
         }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem; right: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">✕</span>
+        <img id="lightbox-img" src="" alt="Project Screenshot">
+    </div>
+
     <header>
         <h1>John Ukpong</h1>
         <p>Salesforce Certified Platform Administrator | Based in Kawasaki, Japan</p>
@@ -153,7 +210,11 @@
 
         <section class="intro">
             <h2>About Me</h2>
-            <p>Certified Salesforce Platform Administrator passionate about building custom solutions and automating business processes. Through hands-on portfolio projects, I've developed expertise in custom object design, Flow Builder automation, and creating data-driven analytics dashboards. Currently seeking opportunities to apply my Salesforce skills in a professional environment while continuing to grow my technical capabilities.</p>
+            <p>People often ask why I moved from seven years of client relations into Salesforce administration. The truth is simple: I love systems that solve problems. I spent years navigating complex workflows and dealing with manual bottlenecks, and I realized I'd rather be the person building the solution than the person struggling with the workaround.</p>
+            <p>I moved to Japan in 2023. I am a Salesforce Certified Platform Administrator, but I am a problem-solver first. Whether I am designing a new object relationship, building a flow that eliminates manual data entry, or creating a dashboard that makes a messy pipeline clear, my goal is to make the system work for the person using it.</p>
+            <p>When I am not in the Org, you can find me on the futsal pitch, catching a match, or digging into JavaScript to sharpen my technical edge. I believe that whether it is on the field or in a developer environment, if you are not constantly practicing, you are standing still.</p>
+            <p>I treat my toolkit like a craftsman treats their gear. I am deep into the Salesforce ecosystem, but I am currently expanding into web technologies like JavaScript to build even more custom, integrated experiences.</p>
+            <p>If you are looking for someone who understands both the human side of operations and the technical side of platform administration, let's talk. I am based in Japan and open to remote opportunities where I can help a team get a little more efficient every day.</p>
         </section>
 
         <section class="certifications">
@@ -194,7 +255,12 @@
             
             <div class="projects">
 
+                <!-- Project 1 -->
                 <div class="project-card">
+                    <img src="project1-job-tracker.PNG" 
+                         alt="Job Application Tracker Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
                     <div class="project-content">
                         <h3>📋 Job Application Tracker (End-to-End CRM App)</h3>
                         <p>Complete end-user application designed for daily use, featuring intuitive navigation, filtered views, and a custom Lightning interface for managing the job search lifecycle from research through offer stages.</p>
@@ -214,7 +280,12 @@
                     </div>
                 </div>
 
+                <!-- Project 2 -->
                 <div class="project-card">
+                    <img src="project2-flow-builder.PNG" 
+                         alt="Automated Follow-up Flow Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
                     <div class="project-content">
                         <h3>⚡ Automated Follow-up System</h3>
                         <p>Record-triggered Flow that automates task creation and email alerts based on application status changes.</p>
@@ -234,7 +305,12 @@
                     </div>
                 </div>
 
+                <!-- Project 3 -->
                 <div class="project-card">
+                    <img src="project3-dashboard.PNG" 
+                         alt="Analytics Dashboard Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
                     <div class="project-content">
                         <h3>📊 Analytics Dashboard</h3>
                         <p>Comprehensive analytics dashboard with multiple report types and visualizations for data-driven decision making.</p>
@@ -254,7 +330,12 @@
                     </div>
                 </div>
 
+                <!-- Project 4 -->
                 <div class="project-card">
+                    <img src="project4-knowledge-hub.PNG" 
+                         alt="Learning Resources Knowledge Hub Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
                     <div class="project-content">
                         <h3>📚 Learning Resources Knowledge Hub</h3>
                         <p>Personal knowledge management system with lookup relationships for organizing learning materials and tracking progress.</p>
@@ -274,7 +355,12 @@
                     </div>
                 </div>
 
+                <!-- Project 5 -->
                 <div class="project-card">
+                    <img src="project5-daily-log.PNG" 
+                         alt="Daily Work Log System Screenshot" 
+                         class="project-screenshot"
+                         onclick="openLightbox(this.src)">
                     <div class="project-content">
                         <h3>📔 Daily Work Log System</h3>
                         <p>Personal productivity tracking system for logging daily Salesforce activities, learnings, and progress with categorization and time tracking.</p>
@@ -310,5 +396,21 @@
     <footer>
         <p>&copy; 2025 John Ukpong | Salesforce Platform Administrator Portfolio</p>
     </footer>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
 </body>
 </html>
